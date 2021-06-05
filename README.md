@@ -39,3 +39,13 @@ https://hedgehog.den.dev/feeds/discussions.xml
 ```http
 https://hedgehog.den.dev/feeds/toprecent-week.xml
 ```
+
+## Building
+
+1. Install [Python 3](https://www.python.org/) on your target operating system.
+2. Create a virtual environment with `python3 -m venv .env`.
+3. Install required packages with `pip install -r src/feedingress/requirements.txt`.
+4. Set up the Azure Storage [connection string](https://docs.microsoft.com/azure/storage/common/storage-account-keys-manage?tabs=azure-portal) environment variable (`AZURE_STORAGE_CONNECTION_STRING`) to the connection string that you obtain from the [Azure Portal](https://portal.azure.com).
+5. Run the application: `python -m feedingress`.
+
+Once the application runs, it will upload the generated RSS feeds to the Azure Storage account of choice.
