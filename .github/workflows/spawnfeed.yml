@@ -37,8 +37,14 @@ jobs:
     - name: Install Python tools
       run: sudo apt-get update && sudo apt-get install python3
 
+    - name: Get Python version
+      run: python3 --version
+
     - name: List contents of the current folder
       run: ls
 
     - name: Create virtual environment
-      run: python3 -m venv .env
+      run: cd src && python3 -m venv .env
+
+    - name: List contents of the current folder
+      run: ls
