@@ -1,0 +1,44 @@
+name: "Spawn XML Feeds"
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.gitignore'
+      - '**/*.gitattributes'
+  push:
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.gitignore'
+      - '**/*.gitattributes'
+  workflow_dispatch:
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.gitignore'
+      - '**/*.gitattributes'
+  schedule:
+    - cron:  '0 9 * * *'
+
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    if: (github.event_name == 'pull_request' || github.event_name == 'push') && contains(toJson(github.event.commits), '***NO_CI***') == false && contains(toJson(github.event.commits), '[ci skip]') == false && contains(toJson(github.event.commits), '[skip ci]') == false
+    name: Build
+    runs-on: ${{ matrix.os }}
+    env:
+      AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.ASCS }}
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Python tools
+      run: apt-get update && apt-get install python3
+
+    - name: List contents of the current folder
+      run: ls
+
+    - name: Create virtual environment
+      run: python3 -m venv .env
