@@ -48,7 +48,7 @@ class Engine:
 		atom_link.set("type", "application/rss+xml")
 
 		for paper in paper_json:
-			item = ET.SubElement(rss, "item")
+			item = ET.SubElement(channel, "item")
 			item_title = ET.SubElement(item, "title")
 			item_title.text = paper["title"]
 			for paper_author in paper["authors"]:
@@ -66,12 +66,12 @@ class Engine:
 			item_date = ET.SubElement(item, "pubDate")
 			item_date.text = item_date_value
 
-		return ET.tostring(rss, encoding='utf8', method='xml', xml_declaration=True).decode()
+		return ET.tostring(rss, encoding='utf-8', method='xml', xml_declaration=True).decode()
 
 	def upload_feed(feed, connection_string, feed_name):
 		print(f"Uploading feed: {feed_name}")
 
-		content_settings = ContentSettings(content_type='application/xml')
+		content_settings = ContentSettings(content_type='text/xml')
 		blob_service_client = BlobClient.from_connection_string(connection_string, container_name="feeds", blob_name=feed_name)
 
 		blob_service_client.upload_blob(feed, content_settings=content_settings, overwrite=True)
