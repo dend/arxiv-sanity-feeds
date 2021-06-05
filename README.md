@@ -9,4 +9,33 @@
 	<br>
 </div>
 
-![Build badge for vaccine appointment finder](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/spawnfeed.yml/badge.svg)
+![Build badge for Arxiv Sanity Feeds](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/spawnfeed.yml/badge.svg)
+
+All this tool does is scrape [Arxiv Sanity](http://www.arxiv-sanity.com), and produce consumable RSS feeds that can be used in your favorite RSS reader (such as Feedly or Outlook).
+
+Feeds are updated daily.
+
+## Feed Locations
+
+### Home Page
+
+```http
+https://hedgehog.den.dev/feeds/home.xml
+```
+### Top Hyped Papers (Daily)
+
+```http
+https://hedgehog.den.dev/feeds/tophype-day.xml
+```
+
+### Discussed Papers
+
+```http
+https://hedgehog.den.dev/feeds/discussions.xml
+```
+
+### Most Recent Papers (Weekly)
+
+```http
+https://hedgehog.den.dev/feeds/toprecent-week.xml
+```
