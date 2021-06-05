@@ -5,6 +5,8 @@ import json
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from email import utils
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, ContentSettings, __version__
+from io import StringIO
 
 class Engine:
 	def scrape(url):
@@ -31,6 +33,8 @@ class Engine:
 	def spawn_feed(paper_json, feed_title, feed_description, feed_link):
 		rss = ET.Element("rss")
 		rss.set("version", "2.0")
+		rss.set("xmlns:atom", "http://www.w3.org/2005/Atom")
+		rss.set("xmlns:dc", "http://purl.org/dc/elements/1.1/")
 		channel = ET.SubElement(rss, "channel")
 		title = ET.SubElement(channel, "title")
 		title.text = feed_title
@@ -62,5 +66,12 @@ class Engine:
 			item_date = ET.SubElement(item, "pubDate")
 			item_date.text = item_date_value
 
-		print(ET.tostring(rss))
+		return ET.tostring(rss, encoding='utf8', method='xml', xml_declaration=True).decode()
 
+	def upload_feed(feed, connection_string, feed_name):
+		print(f"Uploading feed: {feed_name}")
+
+		content_settings = ContentSettings(content_type='application/xml')
+		blob_service_client = BlobClient.from_connection_string(connection_string, container_name="feeds", blob_name=feed_name)
+
+		blob_service_client.upload_blob(feed, content_settings=content_settings, overwrite=True)
