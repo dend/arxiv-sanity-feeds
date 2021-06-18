@@ -47,26 +47,28 @@ class Engine:
 		atom_link.set("rel", "self")
 		atom_link.set("type", "application/rss+xml")
 
-		for paper in paper_json:
-			item = ET.SubElement(channel, "item")
-			item_title = ET.SubElement(item, "title")
-			item_title.text = paper["title"]
-			for paper_author in paper["authors"]:
-				item_creator = ET.SubElement(item, "dc:creator")
-				item_creator.text = paper_author
-			item_description = ET.SubElement(item, "description")
-			item_description.text = paper["abstract"]
-			item_link = ET.SubElement(item, "link")
-			item_link.text = paper["link"]
-			item_guid = ET.SubElement(item, "guid")
-			item_guid.set("isPermaLink", "true")
-			item_guid.text = paper["link"]
-			datetime_object = datetime.strptime(paper["published_time"], "%m/%d/%Y")
-			item_date_value = utils.format_datetime(datetime_object)
-			item_date = ET.SubElement(item, "pubDate")
-			item_date.text = item_date_value
+		if paper_json != None:
+			for paper in paper_json:
+				item = ET.SubElement(channel, "item")
+				item_title = ET.SubElement(item, "title")
+				item_title.text = paper["title"]
+				for paper_author in paper["authors"]:
+					item_creator = ET.SubElement(item, "dc:creator")
+					item_creator.text = paper_author
+				item_description = ET.SubElement(item, "description")
+				item_description.text = paper["abstract"]
+				item_link = ET.SubElement(item, "link")
+				item_link.text = paper["link"]
+				item_guid = ET.SubElement(item, "guid")
+				item_guid.set("isPermaLink", "true")
+				item_guid.text = paper["link"]
+				datetime_object = datetime.strptime(paper["published_time"], "%m/%d/%Y")
+				item_date_value = utils.format_datetime(datetime_object)
+				item_date = ET.SubElement(item, "pubDate")
+				item_date.text = item_date_value
 
-		return ET.tostring(rss, encoding='utf-8', method='xml', xml_declaration=True).decode()
+			return ET.tostring(rss, encoding='utf-8', method='xml', xml_declaration=True).decode()
+		return None
 
 	def upload_feed(feed, connection_string, feed_name):
 		print(f"Uploading feed: {feed_name}")
