@@ -9,11 +9,14 @@ from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, C
 from io import StringIO
 
 class Engine:
+	# Default timeout, in seconds, for all requests.
+	TIMEOUT = 30
+
 	def scrape(url):
 		try:
 			re_data = re.compile(r'\[{"abstract":.+;\n')
 
-			raw_html = requests.get(url).text
+			raw_html = requests.get(url, timeout=TIMEOUT).text
 			parsed_html = BeautifulSoup(raw_html, features="html.parser")
 
 			scripts = parsed_html.find_all("script")
