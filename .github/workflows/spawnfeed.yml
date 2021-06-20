@@ -52,4 +52,4 @@ jobs:
       run: source src/env/bin/activate && pip install -v -r src/feedingress/requirements.txt
 
     - name: Run the feed ingress
-      run: cd src && python -m feedingress
+      run: source src/env/bin/activate && cd src && python -m feedingress
