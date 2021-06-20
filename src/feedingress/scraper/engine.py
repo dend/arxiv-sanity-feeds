@@ -16,7 +16,7 @@ class Engine:
 		try:
 			re_data = re.compile(r'\[{"abstract":.+;\n')
 
-			raw_html = requests.get(url, timeout=TIMEOUT).text
+			raw_html = requests.get(url, timeout=self.TIMEOUT).text
 			parsed_html = BeautifulSoup(raw_html, features="html.parser")
 
 			scripts = parsed_html.find_all("script")
