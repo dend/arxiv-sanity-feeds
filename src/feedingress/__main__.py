@@ -4,6 +4,9 @@ import os
 print('Arxiv Sanity Feed Scraper - Version 0.0.1')
 azure_storage_connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
 
+# There is nothing here just yet.
+feed = None
+
 # Get the main feed
 print('Scraping main feed.')
 data = engine.Engine.scrape("http://www.arxiv-sanity.com/")
@@ -18,6 +21,7 @@ if feed != None:
 
 # Get top weekly papers
 print('Scraping weekly feed.')
+feed = None
 data = engine.Engine.scrape("http://www.arxiv-sanity.com/top?timefilter=week&vfilter=all")
 
 if data != None:
@@ -30,6 +34,7 @@ if feed != None:
 
 # Get top hyped papers for the past day
 print('Scraping top hyped feed.')
+feed = None
 data = engine.Engine.scrape("http://www.arxiv-sanity.com/toptwtr?timefilter=day")
 
 if data != None:
@@ -42,6 +47,7 @@ if feed != None:
 
 # Get discussed feeds
 print('Scraping discussed feed.')
+feed = None
 data = engine.Engine.scrape("http://www.arxiv-sanity.com/discussions")
 
 if data != None:
