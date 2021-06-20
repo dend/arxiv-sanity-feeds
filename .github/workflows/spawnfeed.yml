@@ -50,3 +50,6 @@ jobs:
 
     - name: Process dependencies & update feeds
       run: source src/env/bin/activate && pip install -r src/feedingress/requirements.txt && cd src && python -m feedingress
+
+    - name: Run the feed ingress
+      run: cd src && python -m feedingress
