@@ -12,7 +12,7 @@ class Engine:
 	# Default timeout, in seconds, for all requests.
 	TIMEOUT = 30
 
-	def scrape(url):
+	def scrape(self, url):
 		try:
 			re_data = re.compile(r'\[{"abstract":.+;\n')
 
