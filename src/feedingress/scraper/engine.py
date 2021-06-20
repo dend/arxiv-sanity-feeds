@@ -12,7 +12,8 @@ class Engine:
 	# Default timeout, in seconds, for all requests.
 	TIMEOUT = 30
 
-	def scrape(self, url):
+	@staticmethod
+	def scrape(url):
 		try:
 			re_data = re.compile(r'\[{"abstract":.+;\n')
 
@@ -33,6 +34,7 @@ class Engine:
 		except Exception as ex:
 			print(f"Failed to get Arxiv Sanity content. Error: {ex}")
 
+	@staticmethod
 	def spawn_feed(paper_json, feed_title, feed_description, feed_link):
 		rss = ET.Element("rss")
 		rss.set("version", "2.0")
@@ -73,6 +75,7 @@ class Engine:
 			return ET.tostring(rss, encoding='utf-8', method='xml', xml_declaration=True).decode()
 		return None
 
+	@staticmethod
 	def upload_feed(feed, connection_string, feed_name):
 		print(f"Uploading feed: {feed_name}")
 
