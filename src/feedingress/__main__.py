@@ -1,6 +1,7 @@
 from feedingress.scraper import engine
 import os
 
+print('Arxiv Sanity Feed Scraper - Version 0.0.1')
 azure_storage_connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
 
 # Get the main feed
