@@ -12,12 +12,12 @@ class Engine:
 	# Default timeout, in seconds, for all requests.
 	TIMEOUT = 30
 
-	@staticmethod
-	def scrape(url):
+	@classmethod
+	def scrape(cls, url):
 		try:
 			re_data = re.compile(r'\[{"abstract":.+;\n')
 
-			raw_html = requests.get(url, timeout=self.TIMEOUT).text
+			raw_html = requests.get(url, timeout=cls.TIMEOUT).text
 			parsed_html = BeautifulSoup(raw_html, features="html.parser")
 
 			scripts = parsed_html.find_all("script")
