@@ -19,24 +19,24 @@ Feeds are updated daily.
 
 ### Home Page [![Subscribe to Home Page feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/home.xml)
 
-```http
+```
 https://hedgehog.den.dev/feeds/home.xml
 ```
 ### Top Hyped Papers (Daily) [![Subscribe to Top Hyped Papers (Daily) feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/tophype-day.xml)
 
-```http
+```
 https://hedgehog.den.dev/feeds/tophype-day.xml
 ```
 
 ### Discussed Papers [![Subscribe to Discussed Papers feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/discussions.xml)
 
-```http
+```
 https://hedgehog.den.dev/feeds/discussions.xml
 ```
 
 ### Most Recent Papers (Weekly) [![Subscribe to Most Recent Papers (Weekly) feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/toprecent-week.xml)
 
-```http
+```
 https://hedgehog.den.dev/feeds/toprecent-week.xml
 ```
 
