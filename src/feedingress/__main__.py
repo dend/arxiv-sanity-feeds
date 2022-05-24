@@ -1,8 +1,11 @@
 from feedingress.scraper import engine
 import os
 
-print('Arxiv Sanity Feed Scraper - Version 0.0.1')
-azure_storage_connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
+print('Arxiv Sanity Feed Scraper - Version 0.0.2')
+region = os.getenv('DO_SPACES_REGION')
+endpoint = os.getenv('DO_SPACES_ENDPOINT')
+access_key = os.getenv('DO_SPACES_ACCESS_KEY')
+secret_key = os.getenv('DO_SPACES_SECRET_KEY')
 
 # There is nothing here just yet.
 feed = None
@@ -17,7 +20,7 @@ else:
 	print('No data to process the feed.')
 
 if feed != None:
-	engine.Engine.upload_feed(feed, azure_storage_connection_string, feed_name="home.xml")
+	engine.Engine.upload_feed(feed, region, endpoint, access_key, secret_key, feed_name="home.xml")
 
 # Get top weekly papers
 print('Scraping weekly feed.')
@@ -30,7 +33,7 @@ else:
 	print('No data to process the feed.')
 
 if feed != None:
-	engine.Engine.upload_feed(feed, azure_storage_connection_string, feed_name="toprecent-week.xml")
+	engine.Engine.upload_feed(feed, region, endpoint, access_key, secret_key, feed_name="toprecent-week.xml")
 
 # Get top hyped papers for the past day
 print('Scraping top hyped feed.')
@@ -43,7 +46,7 @@ else:
 	print('No data to process the feed.')
 
 if feed != None:
-	engine.Engine.upload_feed(feed, azure_storage_connection_string, feed_name="tophype-day.xml")
+	engine.Engine.upload_feed(feed, region, endpoint, access_key, secret_key, feed_name="tophype-day.xml")
 
 # Get discussed feeds
 print('Scraping discussed feed.')
@@ -56,4 +59,4 @@ else:
 	print('No data to process the feed.')
 
 if feed != None:
-	engine.Engine.upload_feed(feed, azure_storage_connection_string, feed_name="discussions.xml")
+	engine.Engine.upload_feed(feed, region, endpoint, access_key, secret_key, feed_name="discussions.xml")
