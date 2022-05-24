@@ -17,7 +17,7 @@ Feeds are updated daily.
 
 ## Feed Locations
 
-### Home Page [![Subscribe to Home Page feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/home.xml)
+### Home Page [![Subscribe to Home Page feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/home.xml) [![Validate home feed](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_home_feed.yml/badge.svg)](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_home_feed.yml)
 
 ```
 https://hedgehog.den.dev/feeds/home.xml
