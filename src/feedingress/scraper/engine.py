@@ -15,7 +15,7 @@ class Engine:
 	@classmethod
 	def scrape(cls, url):
 		try:
-			re_data = re.compile(r'\[{"abstract":.+;\n')
+			re_data = re.compile(r'\[{"authors":.+;\n')
 
 			raw_html = requests.get(url, timeout=cls.TIMEOUT).text
 			parsed_html = BeautifulSoup(raw_html, features="html.parser")
@@ -61,13 +61,13 @@ class Engine:
 					item_creator = ET.SubElement(item, "dc:creator")
 					item_creator.text = paper_author
 				item_description = ET.SubElement(item, "description")
-				item_description.text = paper["abstract"]
+				item_description.text = paper["summary"]
 				item_link = ET.SubElement(item, "link")
-				item_link.text = paper["link"]
+				item_link.text = f'https://arxiv.org/abs/{paper["id"]}'
 				item_guid = ET.SubElement(item, "guid")
 				item_guid.set("isPermaLink", "true")
-				item_guid.text = paper["link"]
-				datetime_object = datetime.strptime(paper["published_time"], "%m/%d/%Y")
+				item_guid.text = f'https://arxiv.org/abs/{paper["id"]}'
+				datetime_object = datetime.strptime(paper["time"], "%B %d %Y")
 				item_date_value = utils.format_datetime(datetime_object)
 				item_date = ET.SubElement(item, "pubDate")
 				item_date.text = item_date_value
