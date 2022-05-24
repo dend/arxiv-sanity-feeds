@@ -22,22 +22,17 @@ Feeds are updated daily.
 ```
 https://hedgehog.den.dev/feeds/home.xml
 ```
-### Top Hyped Papers (Daily) [![Subscribe to Top Hyped Papers (Daily) feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/tophype-day.xml) [![Validate top hyped papers feed](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_top_hyped_feed.yml/badge.svg)](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_top_hyped_feed.yml)
-
-```
-https://hedgehog.den.dev/feeds/tophype-day.xml
-```
-
-### Discussed Papers [![Subscribe to Discussed Papers feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/discussions.xml) [![Validate discussed papers feed](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_discussed_feed.yml/badge.svg)](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_discussed_feed.yml)
-
-```
-https://hedgehog.den.dev/feeds/discussions.xml
-```
 
 ### Most Recent Papers (Weekly) [![Subscribe to Most Recent Papers (Weekly) feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/toprecent-week.xml) [![Validate most recent papers feed](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_most_recent_feed.yml/badge.svg)](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_most_recent_feed.yml)
 
 ```
 https://hedgehog.den.dev/feeds/toprecent-week.xml
+```
+
+### Random Papers (Last Week) [![Subscribe to Random Papers (Last Week) feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/toprecent-week.xml) [![Validate most recent papers feed](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_random_feed.yml/badge.svg)](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_random_feed.yml)
+
+```
+https://hedgehog.den.dev/feeds/random-last-week.xml
 ```
 
 ## Building

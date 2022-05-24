@@ -1,4 +1,4 @@
-name: "Validate top hyped papers feed"
+name: "Validate random papers feed"
 
 on:
   pull_request:
@@ -28,7 +28,7 @@ jobs:
     name: Build
     runs-on: ${{ matrix.os }}
     env:
-      FEED_URL: "https://hedgehog.den.dev/feeds/tophype-day.xml"
+      FEED_URL: "https://hedgehog.den.dev/feeds/random-last-week.xml"
 
     steps:
     - uses: dend/actions/rss-validator@master
