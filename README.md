@@ -29,7 +29,7 @@ https://hedgehog.den.dev/feeds/home.xml
 https://hedgehog.den.dev/feeds/toprecent-week.xml
 ```
 
-### Random Papers (Last Week) [![Subscribe to Random Papers (Last Week) feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/toprecent-week.xml) [![Validate most recent papers feed](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_random_feed.yml/badge.svg)](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_random_feed.yml)
+### Random Papers (Last Week) [![Subscribe to Random Papers (Last Week) feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/random-last-week.xml) [![Validate most recent papers feed](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_random_feed.yml/badge.svg)](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_random_feed.yml)
 
 ```
 https://hedgehog.den.dev/feeds/random-last-week.xml

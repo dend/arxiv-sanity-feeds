@@ -41,7 +41,7 @@ feed = None
 data = engine.Engine.scrape("https://arxiv-sanity-lite.com/?rank=random&time_filter=7")
 
 if data != None:
-	feed = engine.Engine.spawn_feed(data, feed_title="Arxiv Sanity Random Papers Feed (Last Week)", feed_description="Top papers mentioned on Twitter over last day.", feed_link="https://hedgehog.den.dev/feeds/tophype-day.xml")
+	feed = engine.Engine.spawn_feed(data, feed_title="Arxiv Sanity Random Papers Feed (Last Week)", feed_description="Random papers from last week.", feed_link="https://hedgehog.den.dev/feeds/random-last-week.xml")
 else:
 	print('No data to process the feed.')
 
