@@ -87,5 +87,5 @@ class Engine:
                         aws_access_key_id=access_key,
                         aws_secret_access_key=secret_key)
 
-		client.put_object(Body=feed.encode('utf-8'), Bucket='hedgehog', Key=f'feeds/{feed_name}', ContentType='text/xml')
+		client.put_object(Body=feed.encode('utf-8'), Bucket='hedgehog', Key=f'feeds/{feed_name}', ContentType='text/xml', ACL='public-read')
 
