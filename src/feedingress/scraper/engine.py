@@ -81,17 +81,11 @@ class Engine:
 
 		session = boto3.session.Session()
 
-		content_settings = ContentSettings(content_type='text/xml')
 		client = session.client('s3',
-                        region_name='sfo3',
-                        endpoint_url='https://nyc3.digitaloceanspaces.com',
-                        aws_access_key_id='ACCESS_KEY',
-                        aws_secret_access_key='SECRET_KEY')
+                        region_name=region,
+                        endpoint_url=endpoint,
+                        aws_access_key_id=access_key,
+                        aws_secret_access_key=secret_key)
 
-		client.upload_file('/path/to/file.ext',  # Path to local file
-		                   'my-space',  # Name of Space
-		                   'file.ext')  # Name for remote file
+		client.put_object(Body=feed.encode('utf-8'), Bucket='hedgehog', Key=f'feeds/{feed_name}', ContentType='text/xml')
 
-		blob_service_client = BlobClient.from_connection_string(connection_string, container_name="feeds", blob_name=feed_name)
-
-		blob_service_client.upload_blob(feed, content_settings=content_settings, overwrite=True)
