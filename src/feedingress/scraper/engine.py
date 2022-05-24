@@ -57,7 +57,7 @@ class Engine:
 				item = ET.SubElement(channel, "item")
 				item_title = ET.SubElement(item, "title")
 				item_title.text = paper["title"]
-				for paper_author in paper["authors"]:
+				for paper_author in [x.strip() for x in paper["authors"].split(',')]:
 					item_creator = ET.SubElement(item, "dc:creator")
 					item_creator.text = paper_author
 				item_description = ET.SubElement(item, "description")
