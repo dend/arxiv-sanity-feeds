@@ -1,4 +1,4 @@
-name: "Validate home feed"
+name: "Validate most recent papers feed"
 
 on:
   pull_request:
@@ -28,7 +28,7 @@ jobs:
     name: Build
     runs-on: ${{ matrix.os }}
     env:
-      FEED_URL: "https://hedgehog.den.dev/feeds/home.xml"
+      FEED_URL: "https://hedgehog.den.dev/feeds/toprecent-week.xml"
 
     steps:
     - uses: dend/actions/rss-validator@master
