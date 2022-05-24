@@ -28,7 +28,10 @@ jobs:
     name: Build
     runs-on: ${{ matrix.os }}
     env:
-      AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.ASCS }}
+      DO_SPACES_ACCESS_KEY: ${{ secrets.DO_SPACES_ACCESS_KEY }}
+      DO_SPACES_ENDPOINT: ${{ secrets.DO_SPACES_ENDPOINT }}
+      DO_SPACES_REGION: ${{ secrets.DO_SPACES_REGION }}
+      DO_SPACES_SECRET_KEY: ${{ secrets.DO_SPACES_SECRET_KEY }}
 
     steps:
     - uses: actions/checkout@v2
