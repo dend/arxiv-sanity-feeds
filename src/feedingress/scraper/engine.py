@@ -67,7 +67,7 @@ class Engine:
 				item_guid = ET.SubElement(item, "guid")
 				item_guid.set("isPermaLink", "true")
 				item_guid.text = f'https://arxiv.org/abs/{paper["id"]}'
-				datetime_object = datetime.strptime(paper["time"], "%B %d %Y")
+				datetime_object = datetime.strptime(paper["time"], "%b %d %Y")
 				item_date_value = utils.format_datetime(datetime_object)
 				item_date = ET.SubElement(item, "pubDate")
 				item_date.text = item_date_value
