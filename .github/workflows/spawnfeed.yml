@@ -67,12 +67,12 @@ jobs:
       run: source src/env/bin/activate && cd src && python -m feedingress
 
     - name: upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: github-feeds
         path: feeds/
 
-  Upload:
+  Upload-release:
     needs: Scraping
     runs-on: ubuntu-latest
     steps:
@@ -80,8 +80,9 @@ jobs:
         run: | 
           export BUILD_DATE=$(date +"%Y-%m-%d")
           echo "BUILD_DATE=$BUILD_DATE" >> $GITHUB_ENV
+
       - name: download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: github-feeds
           path: feeds/
@@ -97,6 +98,35 @@ jobs:
           body: ${{ env.BUILD_DATE }}
           commit: ${{ github.sha}}
 
+  Upload-R2:
+    needs: Scraping
+    runs-on: ubuntu-latest
+    steps:
+      - name: download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: github-feeds
+          path: feeds/
+
+      # replace ${{ FEED_HOST }} with the R2 feed host
+      - name: Replace feed host
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          include: feeds/*.xml
+          find: ${{ env.FEED_HOST }}
+          replace: ${{ vars.R2_DEV_BUCKET_URL }}
+
+      - name: Deploy to cloudflare R2
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.CLOUDFLARE_R2_BUCKET_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY }}
+          AWS_S3_ENDPOINT: ${{ secrets.CLOUDFLARE_R2_ENDPOINT }}
+          SOURCE_DIR: 'feeds'
+          DEST_DIR: 'feeds'
 
     
   # upload-Digital-ocean:

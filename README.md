@@ -9,7 +9,7 @@
 	<br>
 </div>
 
-[![Build badge for Arxiv Sanity Feeds](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/spawnfeed.yml/badge.svg)](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/spawnfeed.yml) [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://den.dev/ukraine)
+[![Build badge for Arxiv Sanity Feeds](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/spawnfeed.yml/badge.svg)](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/spawnfeed.yml)
 
 All this tool does is scrape [Arxiv Sanity](http://www.arxiv-sanity.com), and produce consumable RSS feeds that can be used in your favorite RSS reader (such as Feedly or Outlook).
 
@@ -17,22 +17,22 @@ Feeds are updated daily.
 
 ## Feed Locations
 
-### Home Page [![Subscribe to Home Page feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/home.xml) [![Validate home feed](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_home_feed.yml/badge.svg)](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_home_feed.yml)
+### Home Page [![Subscribe to Home Page feed](images/subscribe.svg)](https://pub-5051544be931474a96aa69305ea1e4ad.r2.dev/feeds/home.xml) [![Validate home feed](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_home_feed.yml/badge.svg)](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_home_feed.yml)
 
 ```
-https://hedgehog.den.dev/feeds/home.xml
+https://pub-5051544be931474a96aa69305ea1e4ad.r2.dev/feeds/home.xml
 ```
 
-### Most Recent Papers (Weekly) [![Subscribe to Most Recent Papers (Weekly) feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/toprecent-week.xml) [![Validate most recent papers feed](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_most_recent_feed.yml/badge.svg)](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_most_recent_feed.yml)
+### Most Recent Papers (Weekly) [![Subscribe to Most Recent Papers (Weekly) feed](images/subscribe.svg)](https://pub-5051544be931474a96aa69305ea1e4ad.r2.dev/feeds/toprecent-week.xml) [![Validate most recent papers feed](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_most_recent_feed.yml/badge.svg)](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_most_recent_feed.yml)
 
 ```
-https://hedgehog.den.dev/feeds/toprecent-week.xml
+https://pub-5051544be931474a96aa69305ea1e4ad.r2.dev/feeds/toprecent-week.xml
 ```
 
-### Random Papers (Last Week) [![Subscribe to Random Papers (Last Week) feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/random-last-week.xml) [![Validate most recent papers feed](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_random_feed.yml/badge.svg)](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_random_feed.yml)
+### Random Papers (Last Week) [![Subscribe to Random Papers (Last Week) feed](images/subscribe.svg)](https://pub-5051544be931474a96aa69305ea1e4ad.r2.dev/feeds/random-last-week.xml) [![Validate most recent papers feed](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_random_feed.yml/badge.svg)](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_random_feed.yml)
 
 ```
-https://hedgehog.den.dev/feeds/random-last-week.xml
+https://pub-5051544be931474a96aa69305ea1e4ad.r2.dev/feeds/random-last-week.xml
 ```
 
 ## Building
@@ -48,3 +48,14 @@ https://hedgehog.den.dev/feeds/random-last-week.xml
 5. Run the application: `python -m feedingress`.
 
 Once the application runs, it will upload the generated RSS feeds to the Azure Storage account of choice.
+
+## Forking
+I failed to use GitHub release as backend storage. let me know if you have any idea.
+currently using R2 as backend storage.
+ You gonna need to set following `secrets` in your repo: 
+ `CLOUDFLARE_R2_ACCESS_ID` and `CLOUDFLARE_R2_ACCESS_KEY,` which are your R2 access id and key. `CLOUDFLARE_R2_BUCKET_NAME` and `CLOUDFLARE_R2_ENDPOINT`, which are your R2 bucket name and endpoint.
+ following Vars:
+ `R2_DEV_BUCKET_URL` and `R2_PROD_BUCKET_URL`, which is your R2 public url
+
+ also remember to replace the url in the readme file.
+

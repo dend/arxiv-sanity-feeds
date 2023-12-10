@@ -17,7 +17,7 @@ on:
 
 
 env:
-  FEED_HOST: https://api.github.com/repos/${{ github.repository }}/releases/latest
+  FEED_HOST: ${{ vars.R2_DEV_BUCKET_URL}}
     
 jobs:
   build:
@@ -27,7 +27,7 @@ jobs:
     name: Build
     runs-on: ${{ matrix.os }}
     env:
-      FEED_HOST: "${{ vars.FEED_HOST }}/toprecent-week.xml"
+      FEED_HOST: "${{ vars.FEED_HOST }}/feeds/toprecent-week.xml"
 
     steps:
     - uses: dend/actions/rss-validator@master
