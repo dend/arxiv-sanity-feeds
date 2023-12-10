@@ -23,7 +23,7 @@ env:
   FEED_HOST: https://api.github.com/repos/${{ github.repository }}/releases/latest
 
 jobs:
-  Buildenv:
+  Scraping:
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -36,41 +36,30 @@ jobs:
     #   DO_SPACES_SECRET_KEY: ${{ secrets.DO_SPACES_SECRET_KEY }}
 
     steps:
-      # - name: Cache fs
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: src/env
-      #     key: ${{ runner.os }}-pip-${{ hashFiles('src/feedingress/requirements.txt') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-pip-${{ hashFiles('src/feedingress/requirements.txt') }}
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - name: Install Python tools
-      run: sudo apt-get update && sudo apt-get -y install python3 python3-venv
-
-    - name: Get Python version
-      run: python3 --version
-
-    - name: List contents of the current folder
-      run: ls
-
-    - name: Create virtual environment
-      run: cd src && python3 -m venv env
-
-    - name: List contents of the current folder
-      run: ls src
-
-    - name: Process dependencies & update feeds
-      run: source src/env/bin/activate && pip install -v -r src/feedingress/requirements.txt
+    - name: Cache fs
+      id: cache-fs
+      uses: actions/cache@v3
+      with:
+        path: src/env
+        key: ${{ runner.os }}-pip-${{ hashFiles('src/feedingress/requirements.txt') }}
+        # restore-keys: |
+        #   ${{ runner.os }}-pip-${{ hashFiles('src/feedingress/requirements.txt') }}
     
-  
-  Scraping:
-    needs: Buildenv
-    runs-on: ubuntu-latest
-    steps:
-    # - restore-cache:
-    #     keys:
-    #     - ${{ runner.os }}-pip-${{ hashFiles('src/feedingress/requirements.txt') }}
+    - name: setup python
+      if: steps.cache-fs.outputs.cache-hit != 'true'
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+        architecture: 'x64'
+    - name: Install Python envs
+      if : steps.cache-fs.outputs.cache-hit != 'true'
+      run: |
+        python -m pip install --upgrade pip
+        pip install virtualenv
+        cd src && python -m venv env
+        source env/bin/activate && pip install -r feedingress/requirements.txt
         
     - name: Run the feed ingress
       env:
@@ -100,12 +89,13 @@ jobs:
       - name: Deploy to release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: feeds/
+          artifacts: feeds/*.xml
           # token: ${{ secrets.GITHUB_TOKEN }}
-          # tag: latest
+          tag: default
           allowUpdates: true
           artifactErrorsFailBuild: true
           body: ${{ env.BUILD_DATE }}
+          commit: ${{ github.sha}}
 
 
     
