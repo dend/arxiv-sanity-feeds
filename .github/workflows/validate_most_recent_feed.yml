@@ -15,10 +15,9 @@ on:
   schedule:
     - cron:  '0 9 * * *'
 
-
 env:
   FEED_HOST: ${{ vars.R2_DEV_BUCKET_URL}}
-    
+  
 jobs:
   build:
     strategy:
@@ -26,8 +25,9 @@ jobs:
         os: [ubuntu-latest]
     name: Build
     runs-on: ${{ matrix.os }}
-    env:
-      FEED_HOST: "${{ vars.FEED_HOST }}/feeds/toprecent-week.xml"
 
     steps:
-    - uses: dend/actions/rss-validator@master
+      - name: set env
+        run: |
+          echo "FEED_URL=${FEED_HOST}/toprecent-week.xml" >> $GITHUB_ENV
+      - uses: dend/actions/rss-validator@master

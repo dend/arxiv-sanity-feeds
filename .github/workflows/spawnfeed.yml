@@ -56,14 +56,13 @@ jobs:
     - name: Install Python envs
       if : steps.cache-fs.outputs.cache-hit != 'true'
       run: |
+        export FEED_HOST=${{ env.FEED_HOST }}
         python -m pip install --upgrade pip
         pip install virtualenv
         cd src && python -m venv env
         source env/bin/activate && pip install -r feedingress/requirements.txt
         
     - name: Run the feed ingress
-      env:
-        FEED_HOST: https://api.github.com/repos/${{ github.repository }}/releases/latest
       run: source src/env/bin/activate && cd src && python -m feedingress
 
     - name: upload artifacts
