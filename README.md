@@ -9,7 +9,7 @@
 	<br>
 </div>
 
-[![Build badge for Arxiv Sanity Feeds](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/spawnfeed.yml/badge.svg)](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/spawnfeed.yml) [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://den.dev/ukraine)
+[![Build badge for Arxiv Sanity Feeds](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/spawnfeed.yml/badge.svg)](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/spawnfeed.yml) [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://den.dev/ukraine)
 
 All this tool does is scrape [Arxiv Sanity](http://www.arxiv-sanity.com), and produce consumable RSS feeds that can be used in your favorite RSS reader (such as Feedly or Outlook).
 
@@ -17,19 +17,19 @@ Feeds are updated daily.
 
 ## Feed Locations
 
-### Home Page [![Subscribe to Home Page feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/home.xml) [![Validate home feed](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_home_feed.yml/badge.svg)](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_home_feed.yml)
+### Home Page [![Subscribe to Home Page feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/home.xml) [![Validate home feed](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_home_feed.yml/badge.svg)](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_home_feed.yml)
 
 ```
 https://hedgehog.den.dev/feeds/home.xml
 ```
 
-### Most Recent Papers (Weekly) [![Subscribe to Most Recent Papers (Weekly) feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/toprecent-week.xml) [![Validate most recent papers feed](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_most_recent_feed.yml/badge.svg)](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_most_recent_feed.yml)
+### Most Recent Papers (Weekly) [![Subscribe to Most Recent Papers (Weekly) feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/toprecent-week.xml) [![Validate most recent papers feed](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_most_recent_feed.yml/badge.svg)](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_most_recent_feed.yml)
 
 ```
 https://hedgehog.den.dev/feeds/toprecent-week.xml
 ```
 
-### Random Papers (Last Week) [![Subscribe to Random Papers (Last Week) feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/random-last-week.xml) [![Validate most recent papers feed](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_random_feed.yml/badge.svg)](https://github.com/dend/arxiv-sanity-feeds/actions/workflows/validate_random_feed.yml)
+### Random Papers (Last Week) [![Subscribe to Random Papers (Last Week) feed](images/subscribe.svg)](https://hedgehog.den.dev/feeds/random-last-week.xml) [![Validate most recent papers feed](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_random_feed.yml/badge.svg)](https://github.com/HernandoR/arxiv-sanity-feeds/actions/workflows/validate_random_feed.yml)
 
 ```
 https://hedgehog.den.dev/feeds/random-last-week.xml
