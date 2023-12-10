@@ -3,10 +3,8 @@ import requests
 import re
 import json
 import xml.etree.ElementTree as ET
-import boto3
 from datetime import datetime
 from email import utils
-from io import StringIO
 
 class Engine:
 	# Default timeout, in seconds, for all requests.
@@ -75,17 +73,5 @@ class Engine:
 			return ET.tostring(rss, encoding='utf-8', method='xml', xml_declaration=True).decode()
 		return None
 
-	@staticmethod
-	def upload_feed(feed, region, endpoint, access_key, secret_key, feed_name):
-		print(f"Uploading feed: {feed_name}")
 
-		session = boto3.session.Session()
-
-		client = session.client('s3',
-                        region_name=region,
-                        endpoint_url=endpoint,
-                        aws_access_key_id=access_key,
-                        aws_secret_access_key=secret_key)
-
-		client.put_object(Body=feed.encode('utf-8'), Bucket='hedgehog', Key=f'feeds/{feed_name}', ContentType='application/xml', ACL='public-read')
 

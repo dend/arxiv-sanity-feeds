@@ -12,14 +12,13 @@ on:
       - '**/*.gitignore'
       - '**/*.gitattributes'
   workflow_dispatch:
-    paths-ignore:
-      - '**/*.md'
-      - '**/*.gitignore'
-      - '**/*.gitattributes'
   schedule:
     - cron:  '0 9 * * *'
 
 
+env:
+  FEED_HOST: https://api.github.com/repos/${{ github.repository }}/releases/latest
+    
 jobs:
   build:
     strategy:
@@ -28,7 +27,7 @@ jobs:
     name: Build
     runs-on: ${{ matrix.os }}
     env:
-      FEED_URL: "https://hedgehog.den.dev/feeds/toprecent-week.xml"
+      FEED_HOST: "${{ vars.FEED_HOST }}/toprecent-week.xml"
 
     steps:
     - uses: dend/actions/rss-validator@master

@@ -12,28 +12,37 @@ on:
       - '**/*.gitignore'
       - '**/*.gitattributes'
   workflow_dispatch:
-    paths-ignore:
-      - '**/*.md'
-      - '**/*.gitignore'
-      - '**/*.gitattributes'
   schedule:
     - cron:  '0 9 * * *'
+  
+# NOTICE that the Feed Host will be different for each souce
+# and it has to be passed to feed
+# hence each backend will have to have its own workflow
 
+env:
+  FEED_HOST: https://api.github.com/repos/${{ github.repository }}/releases/latest
 
 jobs:
-  build:
+  Buildenv:
     strategy:
       matrix:
         os: [ubuntu-latest]
     name: Build
     runs-on: ${{ matrix.os }}
-    env:
-      DO_SPACES_ACCESS_KEY: ${{ secrets.DO_SPACES_ACCESS_KEY }}
-      DO_SPACES_ENDPOINT: ${{ secrets.DO_SPACES_ENDPOINT }}
-      DO_SPACES_REGION: ${{ secrets.DO_SPACES_REGION }}
-      DO_SPACES_SECRET_KEY: ${{ secrets.DO_SPACES_SECRET_KEY }}
+    # env:
+    #   DO_SPACES_ACCESS_KEY: ${{ secrets.DO_SPACES_ACCESS_KEY }}
+    #   DO_SPACES_ENDPOINT: ${{ secrets.DO_SPACES_ENDPOINT }}
+    #   DO_SPACES_REGION: ${{ secrets.DO_SPACES_REGION }}
+    #   DO_SPACES_SECRET_KEY: ${{ secrets.DO_SPACES_SECRET_KEY }}
 
     steps:
+      # - name: Cache fs
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: src/env
+      #     key: ${{ runner.os }}-pip-${{ hashFiles('src/feedingress/requirements.txt') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-pip-${{ hashFiles('src/feedingress/requirements.txt') }}
     - uses: actions/checkout@v2
 
     - name: Install Python tools
@@ -53,6 +62,73 @@ jobs:
 
     - name: Process dependencies & update feeds
       run: source src/env/bin/activate && pip install -v -r src/feedingress/requirements.txt
-
+    
+  
+  Scraping:
+    needs: Buildenv
+    runs-on: ubuntu-latest
+    steps:
+    # - restore-cache:
+    #     keys:
+    #     - ${{ runner.os }}-pip-${{ hashFiles('src/feedingress/requirements.txt') }}
+        
     - name: Run the feed ingress
+      env:
+        FEED_HOST: https://api.github.com/repos/${{ github.repository }}/releases/latest
       run: source src/env/bin/activate && cd src && python -m feedingress
+
+    - name: upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: github-feeds
+        path: feeds/
+
+  Upload:
+    needs: Scraping
+    runs-on: ubuntu-latest
+    steps:
+      - name: Orgniaze files
+        run: | 
+          export BUILD_DATE=$(date +"%Y-%m-%d")
+          echo "BUILD_DATE=$BUILD_DATE" >> $GITHUB_ENV
+      - name: download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: github-feeds
+          path: feeds/
+
+      - name: Deploy to release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: feeds/
+          # token: ${{ secrets.GITHUB_TOKEN }}
+          # tag: latest
+          allowUpdates: true
+          artifactErrorsFailBuild: true
+          body: ${{ env.BUILD_DATE }}
+
+
+    
+  # upload-Digital-ocean:
+  #   env:
+  #     DO_SPACES_ACCESS_KEY: ${{ secrets.DO_SPACES_ACCESS_KEY }}
+  #     DO_SPACES_ENDPOINT: ${{ secrets.DO_SPACES_ENDPOINT }}
+  #     DO_SPACES_REGION: ${{ secrets.DO_SPACES_REGION }}
+  #     DO_SPACES_SECRET_KEY: ${{ secrets.DO_SPACES_SECRET_KEY }}
+  #   needs: scracping
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Upload to Digital Ocean
+  #       uses: jakejarvis/s3-sync-action@master
+  #       with:
+  #         args: --acl public-read --follow-symlinks --delete
+  #       env:
+  #         AWS_S3_BUCKET: ${{ secrets.DO_SPACES_BUCKET_NAME }}
+  #         AWS_ACCESS_KEY_ID: ${{ secrets.DO_SPACES_ACCESS_KEY }}
+  #         AWS_SECRET_ACCESS_KEY: ${{ secrets.DO_SPACES_SECRET_KEY }}
+  #         AWS_REGION: ${{ secrets.DO_SPACES_REGION }}
+  #         SOURCE_DIR: 'src/feeds'
+
+    
+  
