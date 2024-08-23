@@ -83,5 +83,5 @@ class Engine:
 		container_client = blob_service_client.get_container_client(container_name)
 		blob_client = container_client.get_blob_client(feed_name)
 		content_settings = ContentSettings(content_type="application/xml", content_encoding="utf-8")
-		blob_client.upload_blob(feed, content_settings=content_settings)
+		blob_client.upload_blob(feed, content_settings=content_settings, overwrite=True)
 
