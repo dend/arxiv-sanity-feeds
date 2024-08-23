@@ -41,10 +41,7 @@ https://hedgehog.den.dev/feeds/random-last-week.xml
 2. Create a virtual environment with `python3 -m venv .env`.
 3. Install required packages with `pip install -r src/feedingress/requirements.txt`.
 4. Set up the following environment variables:
-	- `DO_SPACES_ENDPOINT` - this is your DigitalOcean Spaces endpoint, including the `https://` prefix.
-	- `DO_SPACES_REGION` - this is your DigitalOcean Spaces region, such as `sfo3`.
-	- `DO_SPACES_ACCESS_KEY` - access key for DigitalOcean Spaces. 
-	- `DO_SPACES_SECRET_KEY` - secret key for DigitalOcean Spaces.
+	- `AZ_STORAGE_CS` - the Azure Storage account connection string.
 5. Run the application: `python -m feedingress`.
 
 Once the application runs, it will upload the generated RSS feeds to the Azure Storage account of choice.
