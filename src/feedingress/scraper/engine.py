@@ -3,7 +3,7 @@ import requests
 import re
 import json
 import xml.etree.ElementTree as ET
-import boto3
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, ContentSettings
 from datetime import datetime
 from email import utils
 from io import StringIO
@@ -76,16 +76,12 @@ class Engine:
 		return None
 
 	@staticmethod
-	def upload_feed(feed, region, endpoint, access_key, secret_key, feed_name):
+	def upload_feed(feed, connection_string, feed_name):
 		print(f"Uploading feed: {feed_name}")
-
-		session = boto3.session.Session()
-
-		client = session.client('s3',
-                        region_name=region,
-                        endpoint_url=endpoint,
-                        aws_access_key_id=access_key,
-                        aws_secret_access_key=secret_key)
-
-		client.put_object(Body=feed.encode('utf-8'), Bucket='hedgehog', Key=f'feeds/{feed_name}', ContentType='application/xml', ACL='public-read')
+		blob_service_client = BlobServiceClient.from_connection_string(connection_string)
+		container_name = "feeds"
+		container_client = blob_service_client.get_container_client(container_name)
+		blob_client = container_client.get_blob_client(feed_name)
+		content_settings = ContentSettings(content_type="application/xml", content_encoding="utf-8")
+		blob_client.upload_blob(feed, content_settings=content_settings)
 

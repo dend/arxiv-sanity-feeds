@@ -29,9 +29,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       DO_SPACES_ACCESS_KEY: ${{ secrets.DO_SPACES_ACCESS_KEY }}
-      DO_SPACES_ENDPOINT: ${{ secrets.DO_SPACES_ENDPOINT }}
-      DO_SPACES_REGION: ${{ secrets.DO_SPACES_REGION }}
-      DO_SPACES_SECRET_KEY: ${{ secrets.DO_SPACES_SECRET_KEY }}
+      AZ_STORAGE_CS: ${{ secrets.AZ_STORAGE_CS }}
 
     steps:
     - uses: actions/checkout@v2

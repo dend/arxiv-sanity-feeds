@@ -1,11 +1,8 @@
 from feedingress.scraper import engine
 import os
 
-print('Arxiv Sanity Feed Scraper - Version 0.0.2')
-region = os.getenv('DO_SPACES_REGION')
-endpoint = os.getenv('DO_SPACES_ENDPOINT')
-access_key = os.getenv('DO_SPACES_ACCESS_KEY')
-secret_key = os.getenv('DO_SPACES_SECRET_KEY')
+print('Arxiv Sanity Feed Scraper - Version 0.0.3')
+connection_string = os.getenv('AZ_STORAGE_CS')
 
 # There is nothing here just yet.
 feed = None
@@ -20,7 +17,7 @@ else:
 	print('No data to process the feed.')
 
 if feed != None:
-	engine.Engine.upload_feed(feed, region, endpoint, access_key, secret_key, feed_name="home.xml")
+	engine.Engine.upload_feed(feed, connection_string, feed_name="home.xml")
 
 # Get top weekly papers
 print('Scraping weekly feed.')
@@ -33,7 +30,7 @@ else:
 	print('No data to process the feed.')
 
 if feed != None:
-	engine.Engine.upload_feed(feed, region, endpoint, access_key, secret_key, feed_name="toprecent-week.xml")
+	engine.Engine.upload_feed(feed, connection_string, feed_name="toprecent-week.xml")
 
 # Get top hyped papers for the past day
 print('Scraping random (last week) feed.')
@@ -46,4 +43,4 @@ else:
 	print('No data to process the feed.')
 
 if feed != None:
-	engine.Engine.upload_feed(feed, region, endpoint, access_key, secret_key, feed_name="random-last-week.xml")
+	engine.Engine.upload_feed(feed, connection_string, feed_name="random-last-week.xml")
