@@ -28,8 +28,10 @@ jobs:
     name: Build
     runs-on: ${{ matrix.os }}
     env:
-      DO_SPACES_ACCESS_KEY: ${{ secrets.DO_SPACES_ACCESS_KEY }}
-      AZ_STORAGE_CS: ${{ secrets.AZ_STORAGE_CS }}
+      R2_ACCESS_KEY: ${{ secrets.R2_ACCESS_KEY }}
+      R2_SECRET_KEY: ${{ secrets.R2_SECRET_KEY }}
+      R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+      R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
 
     steps:
     - uses: actions/checkout@v2
