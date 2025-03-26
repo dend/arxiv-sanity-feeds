@@ -1,0 +1,34 @@
+name: "Validate most recent papers feed"
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.gitignore'
+      - '**/*.gitattributes'
+  push:
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.gitignore'
+      - '**/*.gitattributes'
+  workflow_dispatch:
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.gitignore'
+      - '**/*.gitattributes'
+  schedule:
+    - cron:  '0 9 * * *'
+
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    name: Build
+    runs-on: ${{ matrix.os }}
+    env:
+      FEED_URL: "https://hedgehog.den.dev/feeds/toprecent-week.xml"
+
+    steps:
+    - uses: dend/actions/rss-validator@master
